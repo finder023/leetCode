@@ -11,6 +11,9 @@ Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer 
 
 */
 
+//这是用蛮力法实现的方法，时间复杂度为O(n^2),效果不好
+//整个ASCII码有7位，起始字符是NULL，即为0.
+
 class Solution {
 public:
     int length = 0;
