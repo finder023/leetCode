@@ -21,8 +21,8 @@ public:
                 temp[i] = nums2[n2++];
             else
                 temp[i] = nums1[n1++];
-            
-            
+
+
             if(i == temp.size() / 2){
                 if(temp.size() % 2 == 0){
                     mid = (double)(temp[i] + temp[i-1]) / 2;
@@ -38,4 +38,38 @@ public:
 
 /*
 这段代码虽然accepted，但是运行速度缓慢，beats 6% of cpp submissions,改进并不简单啊
+*/
+
+/*
+这种高难度问题还是交给博客大神了，已跪。
+好了这就来分析问题，首先需要明确中位数的作用：将一个数组分为相等的两组数，其中后一组数每一个数都大于前一组数。
+题目中给了两个数组A，B，首先随机选取两个数组的分割位置i,j，将其分为四份：
+A_left:A[0, 1, ..., i-1]; A_right:A[i, i+1, ..., m];
+B_left:B[0,1,..., j-1]; B_right:B[j, j+1, ..., n];
+将他们合并成两个数组：
+Left:{A_left, B_left}; Right[A_right, B_right];
+我们要找的中位数是将Left和Right分开，必须满足两个条件：
+(1) Left.length == Right.length
+(2) Left.max < Right.min
+将这两个条件体现到参数上，就是：
+i+j == m-i+n-j; ==> j=(m+n)/2-i; 其中: i=0~m; n>=m
+A[i-1]<=B[j] && B[j-1]<=A[i];
+
+问题就变成了如何选取i的问题，只要选取的i满足条件2，则完成了数组的划分，也就找到了中位数。
+关于i的选取，采用二分查找法，可以在O(log(m))时间内找到。
+步骤如下：
+初始i查找范围为0~m，选取i=m/2
+当A[i-1]>B[j]时，说明i过大，需要减小i，重新设定二分查找的范围为0~m/2-1
+当A[i]<B[j-1]时，i过小，查找范围为m/2+1~m
+
+这样，程序的时间复杂度为O(log(min(m, n)))!
+
+
+
+
+
+
+
+
+
 */
