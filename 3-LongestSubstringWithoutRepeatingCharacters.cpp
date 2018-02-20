@@ -48,7 +48,6 @@ public:
                 length = tlen;
             }
         }
-
         return length;
     }
 };
