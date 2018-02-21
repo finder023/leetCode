@@ -52,7 +52,9 @@ Left:{A_left, B_left}; Right[A_right, B_right];
 (1) Left.length == Right.length
 (2) Left.max < Right.min
 将这两个条件体现到参数上，就是：
-i+j == m-i+n-j; ==> j=(m+n)/2-i; 其中: i=0~m; n>=m
+i+j = m-i+n-j; ==> j=(m+n)/2-i; 其中: i=0~m; n>=m
+**OR i+j = m-i+n-j+1; ==> j=(m+n+1)/2-i; 其中：i=0~m; n>=m;
+**我们喜欢采用后一种方式，这样：j=(m+n+1)/2-i >= (2m+1)/2-m > 0
 A[i-1]<=B[j] && B[j-1]<=A[i];
 
 问题就变成了如何选取i的问题，只要选取的i满足条件2，则完成了数组的划分，也就找到了中位数。
@@ -63,13 +65,80 @@ A[i-1]<=B[j] && B[j-1]<=A[i];
 当A[i]<B[j-1]时，i过小，查找范围为m/2+1~m
 
 这样，程序的时间复杂度为O(log(min(m, n)))!
-
-
-
-
-
-
-
-
-
 */
+
+class Solution {
+public:
+	double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+		vector<int>& A = nums1.size() <= nums2.size() ? nums1 : nums2;
+		vector<int>& B = nums1.size()>nums2.size() ? nums1 : nums2;
+
+		int m = A.size();
+		int n = B.size();
+		int i, j;
+		int imin = 0, imax = m;
+		double mid;
+		if (m == 0) {
+			if (n % 2 == 0)
+				mid = (double)(B[n / 2] + B[n / 2 - 1]) / 2;
+			else
+				mid = B[n / 2];
+			return mid;
+		}
+        //主循环
+		while (imin <= imax) {
+			i = (imax + imin) / 2;
+			j = (m + n + 1) / 2 - i;
+            //i=0时的边界情况处理
+			if (i == 0) {
+				if (B[j - 1] <= A[i]) {
+					if ((m + n) % 2 == 0) {
+						if (j == n)
+							mid = (double)(A[i] + B[j - 1]) / 2;
+						else
+							mid = (double)((B[j]<=A[i]?B[j]:A[i]) + B[j-1]) / 2;
+					}
+					else
+						mid = A[i] <= B[j - 1] ? A[i] : B[j - 1];
+					break;
+				}
+				else {
+					imin = i + 1;
+					continue;
+				}
+			}
+            //i=m时的边界情况处理
+			if (i == m && A[i - 1] <= B[j]) {
+				if ((m + n) % 2 == 0) {
+					if (j == 0)
+						mid = (double)(A[i - 1] + B[j]) / 2;
+					else
+						mid = (double)((B[j - 1] >= A[i - 1] ? B[j - 1] : A[i - 1]) + B[j]) / 2;
+				}
+				else {
+					mid = B[j - 1] >= A[i-1] ? B[j - 1] : A[i-1];
+				}
+				break;
+			}
+			if (A[i - 1] <= B[j] && B[j - 1] <= A[i]) {
+				if ((m + n) % 2 == 0) {
+					mid = (double)((A[i - 1] >= B[j - 1] ? A[i - 1] : B[j - 1]) + (A[i] <= B[j] ? A[i] : B[j])) / 2;
+				}
+				else
+					mid = A[i - 1] >= B[j - 1] ? A[i - 1] : B[j - 1];
+				break;
+			}
+
+			if (A[i - 1]>B[j]) {
+				imax = i - 1;
+			}
+			else if (A[i]<B[j - 1]) {
+				imin = i + 1;
+			}
+
+		}
+
+		return mid;
+
+	}
+};
