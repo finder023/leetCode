@@ -19,7 +19,6 @@ public:
 					isEnd = true;
 					break;
 				}
-
 				if (count < numRows) {
 					data[count].push_back(s[i]);
 				}
