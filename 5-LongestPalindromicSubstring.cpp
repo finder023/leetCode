@@ -1,3 +1,7 @@
+/*
+寻找最长的回文子字符串，这个原理上其实很简单，有两个思路，一是动态规划，二是如下代码所示，从中间点开始出发，顺两边延伸寻找最长的回文字符串。
+*/
+
 class Solution {
 public:
 	string longestPalindrome(string s) {
