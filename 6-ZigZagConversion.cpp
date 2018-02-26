@@ -8,13 +8,12 @@ public:
         if(numRows == 1 || s.length() <= 1)
             return s;
 		vector<string> data(numRows);
-		int z = numRows - 2;
-		int j, k, i=0;
+		int j, i=0;
 		int count = 0;
 		bool isEnd = false;
 		while (!isEnd) {
 			count = 0;
-			for (j = 0; j<numRows + z; ++j) {
+			for (j = 0; j<2*numRows-2; ++j) {
 				if (i >= s.length()) {
 					isEnd = true;
 					break;
