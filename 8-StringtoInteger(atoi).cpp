@@ -22,14 +22,14 @@ public:
                 else
                     return 0;
             }
-            
+
 			else if (str[i] == '+'){
                 if(!isNegativeSet && !isPositiveSet)
                     isPositiveSet = true;
                 else
                     return 0;
             }
-				
+
 			else if (str[i] <= '9' && str[i] >= '0')
 				sr.push_back(str[i]);
             else
