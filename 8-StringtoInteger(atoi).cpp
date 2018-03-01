@@ -1,3 +1,8 @@
+/*
+好多细节当时都忽略了
+几个条件。1，去除开头的空字符.2.开始数字部分时，如果出现非数字字符，停止转换。3.非法返回0。4.当数值超过INT范围时，返回INT_MIN or INT_MAX
+*/
+
 class Solution {
 public:
 	int myAtoi(string str) {
