@@ -82,7 +82,7 @@ public:
 				}
                 //窗口始端跳转
 				i = it->second + 1;
-                hmap[s[j]] = j;     //对重复字符的序列号更新，很重要！
+        hmap[s[j]] = j;     //对重复字符的序列号更新，很重要！
 				tlen = ++j - i;     //重新计算窗口大小
 				continue;
 			}
