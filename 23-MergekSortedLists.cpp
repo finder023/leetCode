@@ -8,6 +8,7 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+#include <assert.h>
 
 class minHeap{
     private:
