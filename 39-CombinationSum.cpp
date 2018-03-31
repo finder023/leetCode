@@ -1,3 +1,24 @@
+/*
+ Given a set of candidate numbers (C) (without duplicates) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
+
+The same repeated number may be chosen from C unlimited number of times.
+
+Note:
+
+    All numbers (including target) will be positive integers.
+    The solution set must not contain duplicate combinations.
+
+For example, given candidate set [2, 3, 6, 7] and target 7,
+A solution set is:
+
+[
+  [7],
+  [2, 2, 3]
+]
+
+*/
+
+
 //这段代码用回溯法求解，耗时较长，回头看看他们的代码实现方法
 //比较棘手的地方是如何高效或者巧妙的规避重复的答案，这里的实现方式是很原始暴力的，不可取
 class Solution {
