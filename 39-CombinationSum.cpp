@@ -59,3 +59,33 @@ public:
 		return result;
 	}
 };
+
+//下面是一个标准的回溯法算法，不用哈希表就可以实现，设立过多的情况会让程序变得复杂难以掌控，同时，果然有巧妙的避免重复的方法，这样，运行时间变为上面程序的1/3
+class Solution {
+public:
+    
+    void backtrack(vector<int>& data, vector< vector<int> >& result, vector<int>& track, int target, int start){
+        if(target < 0)
+            return;
+        else if(target == 0){
+            result.push_back(vector<int>(track.begin(), track.end()));
+            return;
+        }
+        else{
+            for(int i=start; i<data.size(); ++i){
+                track.push_back(data[i]);
+                backtrack(data, result, track, target-data[i], i );
+                track.pop_back();
+            }
+        }
+        
+    }
+	
+	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+		vector< vector<int> > result;
+        	vector<int> track;
+		sort(candidates.begin(), candidates.end());
+		backtrack(candidates, result, track, target, 0);
+		return result;
+	}
+};
