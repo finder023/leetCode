@@ -5,6 +5,7 @@
 一开始相当的一段段匹配，而该算法是对每个字符进行逐一匹配，可以尝试一下不递归的版本，可能更加高效
 */
 
+
 class Solution {
 public:
 	bool isMatch(string s, string p) {
@@ -19,3 +20,4 @@ public:
 
 	}
 };
+
