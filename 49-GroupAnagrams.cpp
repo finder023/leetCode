@@ -18,9 +18,8 @@ public:
         unordered_map<string, int>::iterator it;
         int index = 0;
         for(int i=0; i<sortedString.size(); ++i){
-            if((it = msi.find(sortedString[i])) != msi.end()){
+            if((it = msi.find(sortedString[i])) != msi.end())
                 result[it->second].push_back(strs[i]);
-            }
             else{
                 result.push_back(vector<string>(1, strs[i));
                 msi.insert(pair<string, int>(sortedString[i], index++));
