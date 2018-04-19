@@ -22,9 +22,7 @@ public:
                 result[it->second].push_back(strs[i]);
             }
             else{
-                vector<string> temp;
-                temp.push_back(strs[i]);
-                result.push_back(temp);
+                result.push_back(vector<string>(1, strs[i));
                 msi.insert(pair<string, int>(sortedString[i], index++));
             }
         }
