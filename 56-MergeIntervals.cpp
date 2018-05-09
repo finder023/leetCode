@@ -37,3 +37,33 @@ public:
     }
    
 };
+
+//补充一个O(n)时间内完成的算法
+class Solution {
+public:
+
+	bool static  compare(const Interval& a, const Interval& b) {
+		return (a.start < b.start);
+	}
+	vector<Interval> merge(vector<Interval>& intervals) {
+        if (intervals.size() < 2) return intervals;
+		//intervals.push_back(newInterval);
+		vector<Interval> result;
+		sort(intervals.begin(), intervals.end(), Solution::compare);
+		Interval tmpend = intervals[0];
+		//tmpend.start = intervals[0].start;
+		for (int i = 0; i<intervals.size() - 1; ++i) {
+			if (tmpend.end >= intervals[i + 1].start) {
+				tmpend.end = max(tmpend.end, intervals[i + 1].end);
+			}
+			else {
+				result.push_back(tmpend);
+				tmpend = intervals[i + 1];
+			}
+		}
+		result.push_back(tmpend);
+		return result;
+
+	}
+};
+
