@@ -43,3 +43,28 @@ public:
         return *phead;
     }
 };
+
+
+//不用栈的方法
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int m, int n) {
+        if (m >= n) return head;
+        ListNode *phead = new ListNode(0);
+        phead->next = head;
+        ListNode *st = NULL, *ed = NULL, *node = phead;
+        int count = 0;
+        for(int i=1; i<m; ++i){
+            node = node->next;
+        }
+        st = node->next;
+        for(int j=0; j<n-m; ++j){
+            ed = st->next;
+            st->next = ed->next;
+            ed->next = node->next;
+            node->next = ed;
+        }
+        
+        return phead->next;
+    }
+};
