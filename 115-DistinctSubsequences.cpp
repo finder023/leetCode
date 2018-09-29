@@ -25,7 +25,16 @@ public:
         }
         
         while ((reIndex = isFitPos(cpos)) != cpos.size()) {
-            
+            int nextIndex;
+            if ((nextIndex = cr[cpos[reIndex]]) == -1)
+                return 0;
+            cpos[reIndex] = nextIndex;
+            while (++reIndex < cpos.size()) {
+                if (cpos[reIndex] > nextIndex)
+                    continue;
+                if ((nextIndex = cr[cpos[reIndex]]) == -1)
+                    return 0;
+            }
         }
         
         
