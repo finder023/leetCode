@@ -11,4 +11,5 @@ struct TreeNode {
       TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+
 static int emptyVal = INT_MAX;
